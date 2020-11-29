@@ -147,7 +147,7 @@ void eXoCAN::filter32Init(int bank, int mode, int a, int b) //32b filters
 
 //bool eXoCAN::transmit(int txId, const void *ptr, unsigned int len)
 //@rtr (remote transmit request) if is true, the receiver ignore the data!
-bool eXoCAN::transmit(int txId, const void *ptr, unsigned int len, bool rtr = false)
+bool eXoCAN::transmit(int txId, const void *ptr, unsigned int len, bool rtr)
 {
     //  uint32_t timeout = 10UL, startT = 0;
     // while (periphBit(tsr, 26) == 0) // tx not ready
