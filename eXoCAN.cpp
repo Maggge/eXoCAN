@@ -149,20 +149,18 @@ void eXoCAN::filter32Init(int bank, int mode, int a, int b) //32b filters
 //@rtr (remote transmit request) if is true, the receiver ignore the data!
 bool eXoCAN::transmit(int txId, const void *ptr, unsigned int len, bool rtr)
 {
-    //  uint32_t timeout = 10UL, startT = 0;
-    // while (periphBit(tsr, 26) == 0) // tx not ready
-    // {
-    //     //     if(startT == 0)
-    //     //         startT = millis();
-    //     //     if((millis() - startT) > timeout)
-    //     //     {
-    //     //         Serial.println("time out");
-    //     //         return false;
-    //     //     }
-    // }
+    uint32_t timeout = millis() + 100UL;
+    while (periphBit(tsr, 26) == 0) // tx not ready
+    {
+        if(millis() > timeout)
+        {
+            Serial.println("time out");
+            return false;
+        }
+    }
     // TME0
-    if (periphBit(tsr, 26) == 0) // tx mailbox 0 not ready)
-        return false;
+    //if (periphBit(tsr, 26) == 0) // tx mailbox 0 not ready)
+    //    return false;
 
     if (_extIDs)
         MMIO32(ti0r) = (MMIO32(ti0r) & 0b111) | (txId << 3); // set 29b extended ID
