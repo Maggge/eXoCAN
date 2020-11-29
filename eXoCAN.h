@@ -153,7 +153,7 @@ public:
   void filterList16Init(int bank, int idA = 0, int idB = 0, int idC = 0, int idD = 0);         // 16b list filters
   void filterMask32Init(int bank, int id = 0, int mask = 0);
   void filterList32Init(int bank, int idA = 0, int idB = 0); // 32b filters
-  bool transmit(int txId, const void *ptr, unsigned int len);
+  bool transmit(int txId, const void *ptr, unsigned int len, bool rtr = true);
   //int receive(volatile int *id, volatile int *fltrIdx, volatile void *pData);
   int receive(volatile int &id, volatile int &fltrIdx, volatile uint8_t pData[]);
   void attachInterrupt(void func());

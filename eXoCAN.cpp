@@ -146,7 +146,8 @@ void eXoCAN::filter32Init(int bank, int mode, int a, int b) //32b filters
 }
 
 //bool eXoCAN::transmit(int txId, const void *ptr, unsigned int len)
-bool eXoCAN::transmit(int txId, const void *ptr, unsigned int len)
+//@rtr (remote transmit request) if is true, the receiver ignore the data!
+bool eXoCAN::transmit(int txId, const void *ptr, unsigned int len, bool rtr = false)
 {
     //  uint32_t timeout = 10UL, startT = 0;
     // while (periphBit(tsr, 26) == 0) // tx not ready
@@ -173,6 +174,7 @@ bool eXoCAN::transmit(int txId, const void *ptr, unsigned int len)
     MMIO32(tdl0r) = ((const uint32_t *)ptr)[0];
     MMIO32(tdh0r) = ((const uint32_t *)ptr)[1];
 
+    periphBit(ti0r, 1) = (uint8_t)rtr;
     periphBit(ti0r, 0) = 1; // tx request
     return true;
 }
