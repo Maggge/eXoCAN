@@ -92,7 +92,7 @@ Written by John Eckert (k2ox).
 BSD license, check license.txt for more information
 All text above must be included in any redistribution
 
-update--------------------------------------------------------------
+--------------------------------------------------------------
 
 ## Changes from original
 * support for data- and remoteframes
